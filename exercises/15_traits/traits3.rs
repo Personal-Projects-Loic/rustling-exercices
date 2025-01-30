@@ -3,7 +3,10 @@ trait Licensed {
     // implementors like the two structs below can share that default behavior
     // without repeating the function.
     // The default license information should be the string "Default license".
-    fn licensing_info(&self) -> String;
+    fn licensing_info(&self) -> String {
+        let str = "Default".to_string();
+        str
+    }
 }
 
 struct SomeSoftware {
@@ -19,6 +22,13 @@ impl Licensed for OtherSoftware {} // Don't edit this line.
 
 fn main() {
     // You can optionally experiment here.
+    let licensing_info = "Default license";
+    let some_software = SomeSoftware { version_number: 1 };
+    let other_software = OtherSoftware {
+        version_number: "v2.0.0".to_string(),
+    };
+
+    println!("{}", some_software.licensing_info());
 }
 
 #[cfg(test)]

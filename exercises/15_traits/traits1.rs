@@ -6,12 +6,23 @@ trait AppendBar {
 
 impl AppendBar for String {
     // TODO: Implement `AppendBar` for the type `String`.
+    fn append_bar(self) -> Self {
+        self + "Bar"
+    }
+}
+
+impl AppendBar for i32 {
+    fn append_bar(self) -> Self {
+        self + 12
+    }
 }
 
 fn main() {
     let s = String::from("Foo");
+    let i = 123;
     let s = s.append_bar();
-    println!("s: {s}");
+    let i = i.append_bar();
+    println!("s: {s}\ni: {i}");
 }
 
 #[cfg(test)]

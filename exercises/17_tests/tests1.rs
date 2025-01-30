@@ -14,10 +14,14 @@ mod tests {
     // TODO: Import `is_even`. You can use a wildcard to import everything in
     // the outer module.
 
+    use crate::is_even;
+
     #[test]
     fn you_can_assert() {
         // TODO: Test the function `is_even` with some values.
-        assert!();
-        assert!();
+        let res1 = is_even(12);
+        let res2 = is_even(13);
+        assert_eq!(res1, true);
+        assert_eq!(res2, false);
     }
 }

@@ -11,15 +11,17 @@
 // Make the necessary code changes in the struct `ReportCard` and the impl
 // block to support alphabetical report cards in addition to numerical ones.
 
+use std::fmt::Display;
+
 // TODO: Adjust the struct as described above.
-struct ReportCard {
-    grade: f32,
+struct ReportCard<T> {
+    grade: T,
     student_name: String,
     student_age: u8,
 }
 
 // TODO: Adjust the impl block as described above.
-impl ReportCard {
+impl<T: Display> ReportCard<T> {
     fn print(&self) -> String {
         format!(
             "{} ({}) - achieved a grade of {}",
@@ -30,6 +32,19 @@ impl ReportCard {
 
 fn main() {
     // You can optionally experiment here.
+    let report = ReportCard {
+        grade: 89.5,
+        student_name: String::from("Alice"),
+        student_age: 16,
+    };
+
+    let report2 = ReportCard {
+        grade: String::from("A+"),
+        student_name: String::from("Loïc"),
+        student_age: 22,
+    };
+
+    println!("{} et {}", report.print(), report2.print())
 }
 
 #[cfg(test)]

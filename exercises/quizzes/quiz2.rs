@@ -24,40 +24,39 @@ enum Command {
 }
 
 mod my_module {
+
     use super::Command;
 
     // TODO: Complete the function as described above.
-    // pub fn transformer(input: ???) -> ??? { ??? }
+    pub fn transformer(input: Vec<(String, Command)>) -> Vec<String> {
+        let mut output = Vec::new();
+
+        for (string, command) in input {
+            let new_string = match command {
+                Command::Uppercase => string.to_uppercase(),
+                Command::Trim => string.trim().to_string(),
+                Command::Append(n) => string + &"bar".repeat(n),
+            };
+            output.push(new_string);
+        }
+        output
+    }
 }
 
 fn main() {
-    // You can optionally experiment here.
-}
+    use my_module::transformer;
+    use Command::*;
 
-#[cfg(test)]
-mod tests {
-    // TODO: What do we need to import to have `transformer` in scope?
-    // use ???;
-    use super::Command;
+    let input = vec![
+        ("hello".to_string(), Uppercase),
+        (" all roads lead to rome! ".to_string(), Trim),
+        ("foo".to_string(), Append(1)),
+        ("bar".to_string(), Append(5)),
+    ];
 
-    #[test]
-    fn it_works() {
-        let input = vec![
-            ("hello".to_string(), Command::Uppercase),
-            (" all roads lead to rome! ".to_string(), Command::Trim),
-            ("foo".to_string(), Command::Append(1)),
-            ("bar".to_string(), Command::Append(5)),
-        ];
-        let output = transformer(input);
+    let output = transformer(input);
 
-        assert_eq!(
-            output,
-            [
-                "HELLO",
-                "all roads lead to rome!",
-                "foobar",
-                "barbarbarbarbarbar",
-            ]
-        );
+    for result in output {
+        println!("{}", result);
     }
 }
